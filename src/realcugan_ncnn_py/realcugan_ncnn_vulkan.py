@@ -110,7 +110,7 @@ class Realcugan:
             if self._models_path == "":
                 model_path = pathlib.Path(self._model)
             else:
-                model_path = self._models_path
+                model_path = pathlib.Path(self._models_path)
             if not model_path.is_dir():
                 model_path = pathlib.Path(__file__).parent / "models" / self._model
 
