@@ -47,6 +47,7 @@ class Realcugan:
         tilesize: int = 0,
         syncgap: int = 3,
         model: str = "models-se",
+        models_path: str = ""
     ):
         """
         RealCUGAN class for Super Resolution
@@ -76,7 +77,7 @@ class Realcugan:
         self._model = model
         self._noise = noise
         self._scale = scale
-
+        self._models_path = models_path
         self._set_parameters(noise, scale, syncgap, tilesize)
 
         self._load()
@@ -106,7 +107,10 @@ class Realcugan:
         :return: None
         """
         if param_path is None or model_path is None:
-            model_path = pathlib.Path(self._model)
+            if self._models_path == "":
+                model_path = pathlib.Path(self._model)
+            else:
+                model_path = self._models_path
             if not model_path.is_dir():
                 model_path = pathlib.Path(__file__).parent / "models" / self._model
 
